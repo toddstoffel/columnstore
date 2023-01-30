@@ -61,15 +61,15 @@ resource "aws_eip" "mcs1_ip" {
 }
 
 resource "aws_instance" "mcs1" {
-  ami               = var.aws_ami
-  subnet_id         = var.aws_subnet
-  availability_zone = var.aws_zone
-  instance_type     = var.aws_mariadb_instance_size
-  key_name          = var.key_pair_name
+  ami                    = var.aws_ami
+  subnet_id              = var.aws_subnet
+  availability_zone      = var.aws_zone
+  instance_type          = var.aws_mariadb_instance_size
+  key_name               = var.key_pair_name
   root_block_device {
-    volume_size     = 100
-    volume_type     = "io2"
-    iops            = 10000
+    volume_size          = 100
+    volume_type          = "io2"
+    iops                 = 10000
   }
   user_data              = file("terraform_includes/create_user.sh")
   vpc_security_group_ids = [aws_security_group.mcs_traffic.id]

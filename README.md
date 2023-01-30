@@ -4,9 +4,9 @@
 
 ## About:
 
-[MariaDB ColumnStore](https://mariadb.com/products/columnstore/) is a columnar storage engine that utilizes a massively parallel distributed data architecture. It's a columnar storage system built by porting [InfiniDB](https://en.wikipedia.org/wiki/InfiniDB) 4.6.7 to MariaDB, and released under the GPL license.
+[MariaDB ColumnStore](https://mariadb.com/products/columnstore/) is a columnar storage engine that utilizes a massively parallel distributed data architecture. It's a was built by porting [InfiniDB](https://en.wikipedia.org/wiki/InfiniDB) 4.6.7 to MariaDB, and released under the GPL license.
 
-It is designed for big data scaling to process petabytes of data, linear scalability and exceptional performance with real-time response to analytical queries. It leverages the I/O benefits of columnar storage, compression, just-in-time projection, and horizontal and vertical partitioning to deliver tremendous performance when analyzing large data sets.
+It is designed to enable high-performance analytics and data warehousing on large datasets. It stores data in columns instead of rows, which can result in faster query processing times compared to traditional row-based storage engines.
 
 This is a [Terraform](https://www.terraform.io/) and [Ansible](https://www.ansible.com/) project to provision a single node [MariaDB ColumnStore](https://mariadb.com/docs/features/mariadb-enterprise-columnstore/#mariadb-enterprise-columnstore) deployment on [Amazon Web Services](https://aws.amazon.com/).
 
