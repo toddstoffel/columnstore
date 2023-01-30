@@ -28,7 +28,7 @@ This super charged deployment will create a MariaDB ColumnStore instance that su
 
 Open a terminal window and clone the repository:
 
-1.  `git clone https://github.com/mariadb-corporation/columnstore-ansible.git`
+1.  `git clone https://github.com/toddstoffel/columnstore.git`
 2.  `cd` into the newly cloned folder
 3.  Edit [variables.tf](variables.tf) and supply your own variables.
 4.  `terraform init`
