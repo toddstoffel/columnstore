@@ -1,12 +1,12 @@
 ![MariaDB](https://mariadb.com/wp-content/uploads/2019/11/mariadb-logo_blue-transparent.png)
 
-## MariaDB Enterprise Server with ColumnStore Engine & MaxScale Proxy
+# MariaDB Enterprise Server with ColumnStore Engine & MaxScale Proxy
 
-### About:
+## About:
 
 This is a [Terraform](https://www.terraform.io/) and [Ansible](https://www.ansible.com/) project to provision a single node [MariaDB ColumnStore](https://mariadb.com/docs/features/mariadb-enterprise-columnstore/#mariadb-enterprise-columnstore) deployment on [Amazon Web Services](https://aws.amazon.com/). 
 
-### Prerequisites:
+## Prerequisites:
 
 *   [Amazon Web Services (AWS) Account](https://aws.amazon.com/)
 *   [Install Terraform](https://www.terraform.io) *<sup>†</sup>*
