@@ -33,7 +33,7 @@ Further information can be found on our [official deployment guide](https://mari
 ##### Current Approved AWS Image(s)
 
 |AMI OS|AMI ID|Region|Architecture|
-|---|---|---|---|---|
+|---|---|---|---|
 |Rocky8|ami-0e3654b38a33c9ca5|us-west-2|x86_64|
 |Rocky8|ami-02dcd060db36cb277|us-west-2|aarch64|
 
