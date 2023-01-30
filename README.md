@@ -31,10 +31,10 @@ Open a terminal window and clone the repository:
 Further information can be found on our [official deployment guide](https://mariadb.com/docs/server/deploy/topologies/single-node/enterprise-columnstore-es10-6-local/).
 
 ##### Current Approved AWS Image(s)
-AMI OS|AMI ID|Region|Zone|Architecture
----|---|---|---
-Rocky8|ami-0e3654b38a33c9ca5|us-west-2|us-west-2c|x86_64
-Rocky8|ami-02dcd060db36cb277|us-west-2|us-west-2c|aarch64
+|AMI OS|AMI ID|Region|Zone|Architecture
+|---|---|---|---
+|Rocky8|ami-0e3654b38a33c9ca5|us-west-2|us-west-2c|x86_64
+|Rocky8|ami-02dcd060db36cb277|us-west-2|us-west-2c|aarch64
 
 #### Cluster Manipulation Tools
 
