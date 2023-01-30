@@ -8,7 +8,11 @@ MariaDB ColumnStore is a columnar storage engine that utilizes a massively paral
 
 It is designed for big data scaling to process petabytes of data, linear scalability and exceptional performance with real-time response to analytical queries. It leverages the I/O benefits of columnar storage, compression, just-in-time projection, and horizontal and vertical partitioning to deliver tremendous performance when analyzing large data sets.
 
-This is a [Terraform](https://www.terraform.io/) and [Ansible](https://www.ansible.com/) project to provision a single node [MariaDB ColumnStore](https://mariadb.com/docs/features/mariadb-enterprise-columnstore/#mariadb-enterprise-columnstore) deployment on [Amazon Web Services](https://aws.amazon.com/). 
+This is a [Terraform](https://www.terraform.io/) and [Ansible](https://www.ansible.com/) project to provision a single node [MariaDB ColumnStore](https://mariadb.com/docs/features/mariadb-enterprise-columnstore/#mariadb-enterprise-columnstore) deployment on [Amazon Web Services](https://aws.amazon.com/).
+
+## Features:
+
+This super charged deployment will create a MariaDB ColumnStore instance that supports both analytics and transcational operations. It is fronted by a MaxScale listener that will serve as the endpoint for your client connections. The addition of MaxScale allows for [query cacheing](https://mariadb.com/kb/en/mariadb-maxscale-2208-cache/#overview) and a myriad of other advanced [options](https://mariadb.com/kb/en/mariadb-maxscale-2208/).
 
 ## Prerequisites:
 
