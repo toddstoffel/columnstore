@@ -20,7 +20,7 @@ This is a [Terraform](https://www.terraform.io/) and [Ansible](https://www.ansib
 
 ## Features:
 
-This **super charged** deployment will create a MariaDB ColumnStore instance that supports both analytics and transcational operations. It is fronted by a MaxScale listener that will serve as the endpoint for your client connections. The addition of MaxScale allows for [query cacheing](https://mariadb.com/kb/en/mariadb-maxscale-2208-cache/#overview) and a myriad of other advanced [options](https://mariadb.com/kb/en/mariadb-maxscale-2208/).
+This **super charged** deployment will create a MariaDB ColumnStore instance that supports both analytics (ColumnStore) and transactional (InnoDB) operations. It is fronted by a MaxScale listener that will serve as the endpoint for your client connections. The addition of MaxScale allows for [query cacheing](https://mariadb.com/kb/en/mariadb-maxscale-2208-cache/#overview) and a myriad of other advanced [options](https://mariadb.com/kb/en/mariadb-maxscale-2208/).
 
 ## Prerequisites:
 
