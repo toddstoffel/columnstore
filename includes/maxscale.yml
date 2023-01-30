@@ -10,11 +10,17 @@
 
   tasks:
 
-    - name: "Copy MaxScale Static Config"
-      ansible.builtin.template:
-        src: "{{ playbook_dir.split('/')[:-1] | join('/') }}/templates/maxscale.cnf.j2"
+    - name: "Creating Basic MaxScale Config"
+      ansible.builtin.copy:
         dest: /etc/maxscale.cnf
-        mode: '0644'
+        mode: '0660'
+        owner: maxscale
+        group: maxscale
+        content: |
+          [maxscale]
+          threads=auto
+          admin_host=0.0.0.0
+          admin_secure_gui=false
 
     - name: "Clearing MaxScale"
       ansible.builtin.uri:

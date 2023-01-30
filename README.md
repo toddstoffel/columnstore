@@ -46,6 +46,12 @@ Open a terminal window and clone the repository:
 
 Further information can be found on our [official deployment guide](https://mariadb.com/docs/server/deploy/topologies/single-node/enterprise-columnstore-es10-6-local/).
 
+## Sample Data:
+
+For a sample data set that uses the on time performance dataset from the Bureau of Transportation Statistics (BTS) for US based commercial airline flights please visit:
+
+[Flights Sample Data](https://github.com/mariadb-corporation/mariadb-columnstore-samples)
+
 ## Current Approved AWS Image(s)
 
 |AMI OS|AMI ID|Region|Architecture|

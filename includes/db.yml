@@ -10,6 +10,17 @@
 
   tasks:
 
+    - name: "Creating Root .my.cnf File"
+      ansible.builtin.copy:
+        dest: /root/.my.cnf
+        mode: '0600'
+        content: |
+          [client]
+          host=127.0.0.1
+          port={{ maxscale_port }}
+          user={{ admin_user }}
+          password={{ admin_pass }}
+
     - name: "Turn Off Strict Password"
       community.mysql.mysql_variables:
         variable: strict_password_validation
