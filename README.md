@@ -61,9 +61,7 @@ For a sample data set that uses the on time performance dataset from the Bureau 
 
 ## MCS Command-line Instructions
 
-From your primary node:
-
-##### Set API Code:
+###### Set API Code:
 
 ``` mcs cluster set api-key --key <api_key>```
 
@@ -105,7 +103,6 @@ From your primary node:
 *   `terror` Tail error.log
 *   `tinfo` Tail info.log
 *   `twarning` Tail warning.log
-
 
 ## REST-API Instructions
 
