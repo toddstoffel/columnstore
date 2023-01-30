@@ -1,0 +1,47 @@
+---
+
+- hosts: "mcs1"
+  name: "Running A Validation Test"
+  become: true
+  become_user: root
+  vars_files:
+    # yamllint disable-line rule:line-length
+    - '../inventory/group_vars/distro/{{ ansible_distribution|lower }}{{ ansible_distribution_major_version }}.yml'
+
+  tasks:
+
+    - name: "Copying Sample Data File To Server"
+      ansible.builtin.copy:
+        src: ../scripts/cs_validation.sql
+        dest: /tmp/cs_validation.sql
+        mode: '0644'
+
+    - name: "Creating Sample Table"
+      community.mysql.mysql_db:
+        name: all
+        state: import
+        target: /tmp/cs_validation.sql
+        login_unix_socket: '{{ mariadb_socket }}'
+      no_log: true
+
+    - name: "Cleaning Up Sample Data File"
+      ansible.builtin.file:
+        path: /tmp/cs_validation.sql
+        state: absent
+
+    - name: "Validating Cluster Through MaxScale"
+      # yamllint disable-line rule:line-length
+      ansible.builtin.shell: mariadb -h 127.0.0.1 -P {{ maxscale_port }} -u {{ admin_user }} -p{{ admin_pass }} -sN -e "SELECT id FROM cs_validation.mock_data ORDER BY id DESC LIMIT 1;"
+      register: mariadb_result
+      changed_when: mariadb_result.rc != 0
+
+    - name: "Validation Has Failed!"
+      ansible.builtin.command: /bin/false
+      when: mariadb_result.stdout != '10'
+
+    - name: "Cleaning Up After Validation"
+      community.mysql.mysql_db:
+        name: cs_validation
+        state: absent
+        login_unix_socket: '{{ mariadb_socket }}'
+      no_log: true

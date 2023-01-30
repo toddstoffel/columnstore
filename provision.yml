@@ -1,0 +1,47 @@
+---
+
+## Wait For Servers To Boot
+
+- hosts: "mcs1"
+  name: "Waiting For Servers To Initialize"
+  become: true
+  become_user: root
+  gather_facts: false
+
+  tasks:
+    - name: "Waiting For Connection"
+      ansible.builtin.wait_for_connection:
+
+## Bootstrap For Ansible
+
+- hosts: "mcs1"
+  name: "Bootstrapping System For Ansible"
+  become: true
+  become_user: root
+  gather_facts: true
+  vars_files:
+    # yamllint disable-line rule:line-length
+    - 'inventory/group_vars/distro/{{ ansible_distribution|lower }}{{ ansible_distribution_major_version }}.yml'
+
+  pre_tasks:
+    - name: "Bootstrapping System For Ansible"
+      ansible.builtin.raw: '{{ pre_task }}'
+      register: my_output
+      changed_when: my_output.rc != 0
+
+## Include Sub Playbooks
+
+- name: "Preparing The Server"
+  import_playbook: includes/prepare.yml
+
+- name: "Installing MariaDB"
+  import_playbook: includes/install.yml
+
+- name: "Configuring Database"
+  import_playbook: includes/db.yml
+
+- name: "Configuring MaxScale"
+  import_playbook: includes/maxscale.yml
+
+- name: "Validating Installation"
+  import_playbook: includes/validate.yml

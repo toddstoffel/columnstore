@@ -1,0 +1,24 @@
+---
+
+# Configuration
+mariadb_version: 10.6
+maxscale_version: latest
+mariadb_port: 6603
+maxscale_port: 3306
+
+# MariaDB Enterprise Token
+enterprise_token: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+
+# Columnstore Settings
+api_key: xxxxxxxxxxxxxxxxxxxxxxx
+
+# Database Credentials
+admin_user: admin
+admin_pass: C0lumnStore!
+cej_user: cejuser
+cej_pass: C0lumnStore!
+maxscale_user: maxuser
+maxscale_pass: C0lumnStore!
+
+# Instance IDs
+mcs1_id: i-xxxxxxxxxxxxxxxxx

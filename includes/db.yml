@@ -1,0 +1,93 @@
+---
+
+- hosts: "mcs1"
+  name: "Setting Up The Database"
+  become: true
+  become_user: root
+  vars_files:
+    # yamllint disable-line rule:line-length
+    - '../inventory/group_vars/distro/{{ ansible_distribution|lower }}{{ ansible_distribution_major_version }}.yml'
+
+  tasks:
+
+    - name: "Turn Off Strict Password"
+      community.mysql.mysql_variables:
+        variable: strict_password_validation
+        value: 'OFF'
+        login_unix_socket: '{{ mariadb_socket }}'
+      no_log: true
+
+    - name: "Removing 'Test' Database If Exists"
+      community.mysql.mysql_db:
+        name: test
+        state: absent
+        login_unix_socket: '{{ mariadb_socket }}'
+      no_log: true
+
+    - name: "Adding Account For '{{ admin_user }}"
+      community.mysql.mysql_user:
+        name: '{{ admin_user }}'
+        host: '%'
+        password: '{{ admin_pass }}'
+        update_password: on_create
+        priv: '*.*:ALL,GRANT'
+        state: present
+        login_unix_socket: '{{ mariadb_socket }}'
+      no_log: true
+
+    - name: "Adding Account For '{{ cej_user }}"
+      community.mysql.mysql_user:
+        name: '{{ cej_user }}'
+        host: '127.0.0.1'
+        password: '{{ cej_pass }}'
+        update_password: on_create
+        priv: '*.*:SELECT,PROCESS'
+        state: present
+        login_unix_socket: '{{ mariadb_socket }}'
+      no_log: true
+
+    - name: "Adding Account For '{{ maxscale_user }}"
+      community.mysql.mysql_user:
+        name: '{{ maxscale_user }}'
+        host: '127.0.0.1'
+        password: '{{ maxscale_pass }}'
+        update_password: on_create
+        # yamllint disable-line rule:line-length
+        priv: '*.*:SHOW DATABASES,BINLOG ADMIN,READ_ONLY ADMIN,RELOAD,REPLICATION MASTER ADMIN,REPLICATION SLAVE ADMIN,REPLICATION SLAVE,SLAVE MONITOR/mysql.*:SELECT'
+        state: present
+        login_unix_socket: '{{ mariadb_socket }}'
+      no_log: true
+
+    - name: "Turn On Strict Password"
+      community.mysql.mysql_variables:
+        variable: strict_password_validation
+        value: 'ON'
+        login_unix_socket: '{{ mariadb_socket }}'
+
+    - name: "Updating Columnstore.xml With Cross Engine Support User"
+      community.general.xml:
+        path: /etc/columnstore/Columnstore.xml
+        xpath: /Columnstore/CrossEngineSupport/User
+        value: '{{ cej_user }}'
+
+    - name: "Updating Columnstore.xml With Cross Engine Support Password"
+      community.general.xml:
+        path: /etc/columnstore/Columnstore.xml
+        xpath: /Columnstore/CrossEngineSupport/Password
+        value: '{{ cej_pass }}'
+
+    - name: "Adding Nodes To ColumnStore Cluster"
+      ansible.builtin.uri:
+        url: https://127.0.0.1:8640/cmapi/0.4.0/cluster/node
+        method: PUT
+        headers:
+          Content-Type: application/json
+          x-api-key: "{{ api_key }}"
+        validate_certs: false
+        return_content: true
+        status_code: 200
+        body_format: json
+        body: "{{ item }}"
+        timeout: 180
+      loop:
+        - {"timeout":180, "node":"127.0.0.1"}

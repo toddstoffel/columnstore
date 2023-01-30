@@ -1,0 +1,11 @@
+.DS_Store
+.terraform*
+.variables.tf
+.variables.tf-example
+all.yml
+ansible.cfg
+create.sh
+destroy.sh
+hosts
+terraform.tfstate*
+variables.bak
