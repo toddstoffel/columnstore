@@ -42,7 +42,6 @@ variable "aws_subnet" {
   default = "subnet-##########"
 }
 
-
 #### This allows you to work with the ColumnStore Cluster Manager API
 #### The cmapi_key can be any key that you choose. One method to create a random key would be:
 #### $> openssl rand -hex 32
