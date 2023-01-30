@@ -8,7 +8,7 @@
 
 It is designed to enable high-performance analytics and data warehousing on large datasets. It stores data in columns instead of rows, which can result in faster query processing times compared to traditional row-based storage engines.
 
-MariaDB ColumnStore is used for:
+Use cases:
 
 1. High-performance analytics: to quickly process large amounts of data for reporting and analysis.
 1. Data warehousing: to efficiently store and manage large datasets for business intelligence and reporting purposes.
