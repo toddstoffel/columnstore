@@ -105,6 +105,13 @@ variable "maxscale_port" {
   default = "3306"
 }
 
+# for 1 GigE, increase set to 2500
+# for 10 GigE, increase set to 30000
+variable "netdev_max_backlog" {
+  type    = string
+  default = "30000"
+}
+
 variable "reboot" {
   type    = bool
   default = true

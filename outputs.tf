@@ -18,7 +18,8 @@ resource "local_file" "AnsibleVariables" {
       aws_zone                 = var.aws_zone,
       cej_pass                 = var.cej_pass,
       cej_user                 = var.cej_user,
-      cmapi_key                = var.cmapi_key
+      cmapi_key                = var.cmapi_key,
+      id1                      = aws_instance.mcs1.id,
       mariadb_enterprise_token = var.mariadb_enterprise_token,
       mariadb_version          = var.mariadb_version,
       mariadb_port             = var.mariadb_port,
@@ -26,7 +27,7 @@ resource "local_file" "AnsibleVariables" {
       maxscale_port            = var.maxscale_port,
       maxscale_user            = var.maxscale_user,
       maxscale_version         = var.maxscale_version,
-      id1                      = aws_instance.mcs1.id,
+      netdev_max_backlog       = var.netdev_max_backlog,
     }
   )
   filename = "inventory/group_vars/all.yml"

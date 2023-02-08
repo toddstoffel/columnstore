@@ -72,53 +72,36 @@
       register: char_output
       changed_when: char_output.rc != 0
 
-    - name: "Adjusting System vm.swappiness"
-      ansible.posix.sysctl:
-        name: vm.swappiness
-        value: '1'
-        state: present
+    - name: "Optimize ColumnStore Linux Kernel Parameters"
+      ansible.builtin.copy:
+        dest: /etc/sysctl.d/90-mariadb-columnstore.conf
+        mode: '0600'
+        content: |
+          # minimize swapping
+          vm.swappiness = 1
 
-    - name: "Adjusting System vm.vfs_cache_pressure"
-      ansible.posix.sysctl:
-        name: vm.vfs_cache_pressure
-        value: '100'
-        state: present
+          # Increase the TCP max buffer size
+          net.core.rmem_max = 16777216
+          net.core.wmem_max = 16777216
 
-    - name: "Adjusting System net.core.rmem_max"
-      ansible.posix.sysctl:
-        name: net.core.rmem_max
-        value: '16777216'
-        state: present
+          # Increase the TCP buffer limits
+          # min, default, and max number of bytes to use
+          net.ipv4.tcp_rmem = 4096 87380 16777216
+          net.ipv4.tcp_wmem = 4096 65536 16777216
 
-    - name: "Adjusting System net.core.wmem_max"
-      ansible.posix.sysctl:
-        name: net.core.wmem_max
-        value: '16777216'
-        state: present
+          # don't cache ssthresh from previous connection
+          net.ipv4.tcp_no_metrics_save = 1
 
-    - name: "Adjusting System net.ipv4.tcp_rmem"
-      ansible.posix.sysctl:
-        name: net.ipv4.tcp_rmem
-        value: '4096 87380 16777216'
-        state: present
+          # for 1 GigE, increase set to 2500
+          # for 10 GigE, increase set to 30000
+          net.core.netdev_max_backlog = 30000
 
-    - name: "Adjusting System net.ipv4.tcp_wmem"
-      ansible.posix.sysctl:
-        name: net.ipv4.tcp_wmem
-        value: '4096 65536 16777216'
-        state: present
-
-    - name: "Adjusting System net.ipv4.tcp_no_metrics_save"
-      ansible.posix.sysctl:
-        name: net.ipv4.tcp_no_metrics_save
-        value: '1'
-        state: present
-
-    - name: "Adjusting System net.core.netdev_max_backlog"
+    - name: "Load ColumnStore Linux Kernel Parameters"
       ansible.posix.sysctl:
         name: net.core.netdev_max_backlog
-        value: '30000'
-        state: present
+        value: '{{ netdev_max_backlog }}'
+        sysctl_file: /etc/sysctl.d/90-mariadb-columnstore.conf
+        reload: true
 
     - name: "Removing Conflicts"
       ansible.builtin.package:
