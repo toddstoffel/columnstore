@@ -5,6 +5,7 @@ mariadb_version: 10.6
 maxscale_version: latest
 mariadb_port: 6603
 maxscale_port: 3306
+netdev_max_backlog: 30000
 
 # MariaDB Enterprise Token
 enterprise_token: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx

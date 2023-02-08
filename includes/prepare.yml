@@ -92,10 +92,6 @@
           # don't cache ssthresh from previous connection
           net.ipv4.tcp_no_metrics_save = 1
 
-          # for 1 GigE, increase set to 2500
-          # for 10 GigE, increase set to 30000
-          net.core.netdev_max_backlog = 30000
-
     - name: "Load ColumnStore Linux Kernel Parameters"
       ansible.posix.sysctl:
         name: net.core.netdev_max_backlog
