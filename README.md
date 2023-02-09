@@ -48,8 +48,7 @@ Further information can be found on our [official deployment guide](https://mari
 
 ## Access
 
-After using terraform, see your host file to get your elastic ip.
-Your admin credentials should have been selected in step 3 above.
+*After using terraform, see your inventory/hosts file to get your elastic ip. Your admin credentials should have been selected in step 3 above.*
 
 ###### MaxScale GUI Access
 
