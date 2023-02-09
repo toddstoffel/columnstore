@@ -53,23 +53,23 @@ Your admin credentials should have been selected in step 3 above.
 
 ###### MaxScale GUI Access
 
-URL: http://<your_elastic_ip>:8989
-username: admin
-password: mariadb
+*   URL: http://<your_elastic_ip>:8989
+*   username: admin
+*   password: mariadb
 
 ###### Database Access Through MaxScale (Query Cache)
 
-host: <your_elastic_ip>
-port: 3306
-username: <your_admin_user>
-password: <your_admin_pass>
+*   host: <your_elastic_ip>
+*   port: 3306
+*   username: <your_admin_user>
+*   password: <your_admin_pass>
 
 ###### Database Access Direct
 
-host: <your_elastic_ip>
-port: 6603
-username: <your_admin_user>
-password: <your_admin_pass>
+*   host: <your_elastic_ip>
+*   port: 6603
+*   username: <your_admin_user>
+*   password: <your_admin_pass>
 
 ## Sample Data:
 
