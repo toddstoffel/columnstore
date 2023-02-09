@@ -46,6 +46,31 @@ Open a terminal window and clone the repository:
 
 Further information can be found on our [official deployment guide](https://mariadb.com/docs/server/deploy/topologies/single-node/enterprise-columnstore-es10-6-local/).
 
+## Access
+
+After using terraform, see your host file to get your elastic ip.
+Your admin credentials should have been selected in step 3 above.
+
+###### MaxScale GUI Access
+
+URL: http://<your_elastic_ip>:8989
+username: admin
+password: mariadb
+
+###### Database Access Through MaxScale (Query Cache)
+
+host: <your_elastic_ip>
+port: 3306
+username: <your_admin_user>
+password: <your_admin_pass>
+
+###### Database Access Direct
+
+host: <your_elastic_ip>
+port: 6603
+username: <your_admin_user>
+password: <your_admin_pass>
+
 ## Sample Data:
 
 For a sample data set that uses the on time performance dataset from the Bureau of Transportation Statistics (BTS) for US based commercial airline flights please visit:
